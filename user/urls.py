@@ -23,5 +23,7 @@ urlpatterns = [
     path('register_exist/', register_exist),
     path('login/', login, name='login'),
     path('login_handler/', login_handler, name='login_handler'),
-    path('info/', info)
+    path('info/', info, name='info'),
+    path('order/', order, name='order'),
+    path('site/', site, name='site')
 ]

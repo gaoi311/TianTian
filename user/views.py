@@ -12,11 +12,21 @@ handle with the module of users
 
 
 def register(request):
+    '''
+    method: get, return a html
+    :param request:
+    :return:
+    '''
     title = "注册"
     return render(request, 'user/register.html', locals())
 
 
 def register_handler(request):
+    '''
+    function of handling with register
+    :param request:
+    :return:
+    '''
     post = request.POST
     uname = post['user_name']
     upwd = post['pwd']
@@ -38,18 +48,33 @@ def register_handler(request):
 
 
 def register_exist(request):
+    '''
+    function of handling with register when the user already exists
+    :param request:
+    :return:
+    '''
     uname = request.GET['uname']
     count = UserInfo.objects.filter(uname=uname).count()
     return JsonResponse({'count': count})
 
 
 def login(request):
+    '''
+    method: get, return a html
+    :param request:
+    :return:
+    '''
     context = {'title': "登录", 'error_name': 0, 'error_pwd': 0,
                'uname': request.COOKIES.get('uname', ""), 'upwd': request.COOKIES.get("upwd", "")}
     return render(request, 'user/login.html', locals())
 
 
 def login_handler(request):
+    '''
+    function of handling with login
+    :param request:
+    :return:
+    '''
     title = "用户中心"
     post = request.POST
     uname = post['username']
@@ -85,9 +110,49 @@ def login_handler(request):
 
 
 def info(request):
+    '''
+    function of handling with the user information
+    :param request:
+    :return:
+    '''
     context = {
         'title': '用户中心',
         'user': UserInfo.objects.get(id=request.session['user_id'])
     }
 
     return render(request, 'user/user_center_info.html', context=context)
+
+
+def order(request):
+    '''
+    function of handling with the order
+    :param request:
+    :return:
+    '''
+    context = {
+        'title': '用户中心',
+    }
+    return render(request, 'user/user_center_order.html', context=context)
+
+
+def site(request):
+    '''
+    function of handling with the address of user
+    :param request:
+    :return:
+    '''
+    user = UserInfo.objects.get(id=request.session['user_id'])
+    if request.method == 'POST':
+        post = request.POST
+        user.ushou = post['ushou']
+        user.uaddress = post['uaddress']
+        user.uyoubian = post['uyoubian']
+        user.uphone = post['uphone']
+        user.save()
+
+    context = {
+        'title': '用户中心',
+        'user': user
+    }
+
+    return render(request, 'user/user_center_site.html', context=context)
