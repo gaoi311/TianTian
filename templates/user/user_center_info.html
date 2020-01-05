@@ -1,5 +1,13 @@
 {% extends 'basic02.html' %}
 
+{% block active_sort %}
+    <ul>
+        <li><a href="{% url 'info' %}" class="active">· 个人信息</a></li>
+        <li><a href="{% url 'order' %}">· 全部订单</a></li>
+        <li><a href="{% url 'site' %}">· 收货地址</a></li>
+    </ul>
+{% endblock %}
+
 {% block content %}
     <div class="right_content clearfix">
         <div class="info_con clearfix">

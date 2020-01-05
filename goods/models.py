@@ -35,3 +35,10 @@ class GoodsInfo(models.Model):
         db_table = 'goods_goodsinfo'
         verbose_name = '商品'
         verbose_name_plural = verbose_name
+
+
+class CartItem:
+    def __init__(self, cid, num):
+        self.cid = cid
+        self.goods = GoodsInfo.objects.get(pk=int(cid))
+        self.num = num

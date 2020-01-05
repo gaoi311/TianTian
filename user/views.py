@@ -115,12 +115,16 @@ def info(request):
     :param request:
     :return:
     '''
-    context = {
-        'title': '用户中心',
-        'user': UserInfo.objects.get(id=request.session['user_id'])
-    }
+    try:
+        context = {
+            'title': '用户中心',
+            'user': UserInfo.objects.get(id=request.session['user_id'])
+        }
+        return render(request, 'user/user_center_info.html', context=context)
+    except:
+        alert = 1
+        return render(request, 'user/login.html', locals())
 
-    return render(request, 'user/user_center_info.html', context=context)
 
 
 def order(request):
