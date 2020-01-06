@@ -1431,13 +1431,12 @@ model</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="333" parent="242" name="user_id">
-      <ColNames>user_id</ColNames>
-      <Unique>1</Unique>
+    <index id="333" parent="242" name="goods_cartitem_goods_id_ee5aaaa2_fk_goods_goodsinfo_id">
+      <ColNames>goods_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="334" parent="242" name="goods_cartitem_goods_id_ee5aaaa2_fk_goods_goodsinfo_id">
-      <ColNames>goods_id</ColNames>
+    <index id="334" parent="242" name="goods_cartitem_user_id_b572d949">
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="335" parent="242" name="PRIMARY">
@@ -1445,178 +1444,174 @@ model</ColNames>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="336" parent="242" name="user_id">
-      <ColNames>user_id</ColNames>
-      <UnderlyingIndexName>user_id</UnderlyingIndexName>
-    </key>
-    <foreign-key id="337" parent="242" name="goods_cartitem_goods_id_ee5aaaa2_fk_goods_goodsinfo_id">
+    <foreign-key id="336" parent="242" name="goods_cartitem_goods_id_ee5aaaa2_fk_goods_goodsinfo_id">
       <ColNames>goods_id</ColNames>
       <RefSchemaName>tiantian</RefSchemaName>
       <RefTableName>goods_goodsinfo</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="338" parent="242" name="goods_cartitem_user_id_b572d949_fk_user_userinfo_id">
+    <foreign-key id="337" parent="242" name="goods_cartitem_user_id_b572d949_fk_user_userinfo_id">
       <ColNames>user_id</ColNames>
       <RefSchemaName>tiantian</RefSchemaName>
       <RefTableName>user_userinfo</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="339" parent="243" name="id">
+    <column id="338" parent="243" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="340" parent="243" name="gtitle">
+    <column id="339" parent="243" name="gtitle">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="341" parent="243" name="gpic">
+    <column id="340" parent="243" name="gpic">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="342" parent="243" name="gprice">
+    <column id="341" parent="243" name="gprice">
       <Position>4</Position>
       <DataType>decimal(5,2 digit)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="343" parent="243" name="isDelete">
+    <column id="342" parent="243" name="isDelete">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="344" parent="243" name="gunit">
+    <column id="343" parent="243" name="gunit">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="243" name="gclick">
+    <column id="344" parent="243" name="gclick">
       <Position>7</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="346" parent="243" name="gjianjie">
+    <column id="345" parent="243" name="gjianjie">
       <Position>8</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="243" name="gcontext">
+    <column id="346" parent="243" name="gcontext">
       <Position>9</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="348" parent="243" name="gkucun">
+    <column id="347" parent="243" name="gkucun">
       <Position>10</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="349" parent="243" name="gtype_id">
+    <column id="348" parent="243" name="gtype_id">
       <Position>11</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="350" parent="243" name="goods_goodsinfo_gtype_id_b02b0e32_fk_goods_typeinfo_id">
+    <index id="349" parent="243" name="goods_goodsinfo_gtype_id_b02b0e32_fk_goods_typeinfo_id">
       <ColNames>gtype_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="351" parent="243" name="PRIMARY">
+    <key id="350" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="352" parent="243" name="goods_goodsinfo_gtype_id_b02b0e32_fk_goods_typeinfo_id">
+    <foreign-key id="351" parent="243" name="goods_goodsinfo_gtype_id_b02b0e32_fk_goods_typeinfo_id">
       <ColNames>gtype_id</ColNames>
       <RefSchemaName>tiantian</RefSchemaName>
       <RefTableName>goods_typeinfo</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="353" parent="244" name="id">
+    <column id="352" parent="244" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="354" parent="244" name="title">
+    <column id="353" parent="244" name="title">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="355" parent="244" name="isDelete">
+    <column id="354" parent="244" name="isDelete">
       <Position>3</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="356" parent="244" name="PRIMARY">
+    <key id="355" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="357" parent="245" name="id">
+    <column id="356" parent="245" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="358" parent="245" name="uname">
+    <column id="357" parent="245" name="uname">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="245" name="upwd">
+    <column id="358" parent="245" name="upwd">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="245" name="uemail">
+    <column id="359" parent="245" name="uemail">
       <Position>4</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="245" name="ushou">
+    <column id="360" parent="245" name="ushou">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="362" parent="245" name="uaddress">
+    <column id="361" parent="245" name="uaddress">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="363" parent="245" name="uyoubian">
+    <column id="362" parent="245" name="uyoubian">
       <Position>7</Position>
       <DataType>varchar(6)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="364" parent="245" name="uphone">
+    <column id="363" parent="245" name="uphone">
       <Position>8</Position>
       <DataType>varchar(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="365" parent="245" name="PRIMARY">
+    <key id="364" parent="245" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

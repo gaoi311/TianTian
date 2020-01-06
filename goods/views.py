@@ -42,6 +42,11 @@ def index(request):
         'type50': type50, 'type51': type51,
     }
 
+    request.session.set_expiry(0)
+    try:
+        user_name = request.session['user_name']
+    except:
+        request.session['count'] = 0
     return render(request, 'goods/index.html', context=context)
 
 
@@ -111,19 +116,23 @@ def immedi_buy(request, gid, num):
 
 
 def show_cart(request):
-    uid = request.session['user_id']
-    cart = CartItem.objects.filter(user_id=uid)
-    request.session['count'] = cart.count()
-    total = 0
-    for cartitem in cart:
-        total += cartitem.num * cartitem.goods.gprice
-    context = {
-        'title': '购物车',
-        'count': cart.count(),
-        'cart': cart,
-        'total': total
-    }
-    return render(request, 'goods/cart.html', context=context)
+    try:
+        uid = request.session['user_id']
+        cart = CartItem.objects.filter(user_id=uid)
+        request.session['count'] = cart.count()
+        total = 0
+        for cartitem in cart:
+            total += cartitem.num * cartitem.goods.gprice
+        context = {
+            'title': '购物车',
+            'count': cart.count(),
+            'cart': cart,
+            'total': total
+        }
+        return render(request, 'goods/cart.html', context=context)
+    except:
+        alert = 1
+        return render(request, 'user/login.html', locals())
 
 
 def add_cart(request, gid, num):

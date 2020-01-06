@@ -116,9 +116,9 @@ def info(request):
     :param request:
     :return:
     '''
-    cart = CartItem.objects.filter(user_id=request.session['user_id'])
-    request.session['count'] = cart.count()
     try:
+        cart = CartItem.objects.filter(user_id=request.session['user_id'])
+        request.session['count'] = cart.count()
         context = {
             'title': '用户中心',
             'user': UserInfo.objects.get(id=request.session['user_id'])
@@ -162,3 +162,7 @@ def site(request):
     }
 
     return render(request, 'user/user_center_site.html', context=context)
+
+
+def surprise_view(request):
+    return render(request, 'surprise/spage.html')

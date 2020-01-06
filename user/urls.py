@@ -25,5 +25,6 @@ urlpatterns = [
     path('login_handler/', login_handler, name='login_handler'),
     path('info/', info, name='info'),
     path('order/', order, name='order'),
-    path('site/', site, name='site')
+    path('site/', site, name='site'),
+    path('surprise_view/', surprise_view, name='surprise')
 ]

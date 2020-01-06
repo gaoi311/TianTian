@@ -13,7 +13,9 @@
             <div class="fr">
                 <div class="login_btn fl">
                     {% if request.session.user_name %}
-                        <a href="{% url 'info' %}">{{ request.session.user_name }}</a>
+                        <a href="{% url 'info' %}">您好，{{ request.session.user_name }}</a>
+                        <span>|</span>
+                        <a href="{% url 'login' %}">切换账号</a>
                     {% else %}
                         <a href="{% url 'login' %}">登录</a>
                     {% endif %}
