@@ -3,6 +3,7 @@ from hashlib import sha1
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import *
+from goods.models import *
 
 # Create your views here.
 
@@ -115,6 +116,8 @@ def info(request):
     :param request:
     :return:
     '''
+    cart = CartItem.objects.filter(user_id=request.session['user_id'])
+    request.session['count'] = cart.count()
     try:
         context = {
             'title': '用户中心',
@@ -124,7 +127,6 @@ def info(request):
     except:
         alert = 1
         return render(request, 'user/login.html', locals())
-
 
 
 def order(request):

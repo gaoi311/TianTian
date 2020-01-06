@@ -11,11 +11,12 @@
         <div class="header">
             <div class="welcome fl">欢迎来到天天生鲜!</div>
             <div class="fr">
-                <div class="login_info fl">
-                    欢迎您：<em>{{ user.uname }}</em>
-                </div>
                 <div class="login_btn fl">
-                    <a href="{% url 'login' %}">登录</a>
+                    {% if request.session.user_name %}
+                        <a href="{% url 'info' %}">{{ request.session.user_name }}</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">登录</a>
+                    {% endif %}
                     <span>|</span>
                     <a href="{% url 'register' %}">注册</a>
                 </div>
@@ -32,14 +33,14 @@
     </div>
 
     <div class="search_bar clearfix">
-        <a href="index.html" class="logo fl"><img src="/static/images/logo.png"></a>
+        <a href="/" class="logo fl"><img src="/static/images/logo.png"></a>
         <div class="search_con fl">
             <input type="text" class="input_text fl" name="" placeholder="搜索商品">
             <input type="button" class="input_btn fr" name="" value="搜索">
         </div>
         <div class="guest_cart fr">
             <a href="{% url 'show_cart' %}" class="cart_name fl">我的购物车</a>
-            <div class="goods_count fl" id="show_count">1</div>
+            <div class="goods_count fl" id="show_count">{{ request.session.count }}</div>
         </div>
     </div>
 

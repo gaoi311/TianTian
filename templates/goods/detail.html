@@ -1,102 +1,41 @@
 {% extends 'basic03.html' %}
 
-{% block content %}
-    <div class="navbar_con">
-        <div class="navbar clearfix">
-            <div class="subnav_con fl">
-                <h1>全部商品分类</h1>
-                <span></span>
-                <ul class="subnav">
-                    <li><a href="#" class="fruit">新鲜水果</a></li>
-                    <li><a href="#" class="seafood">海鲜水产</a></li>
-                    <li><a href="#" class="meet">猪牛羊肉</a></li>
-                    <li><a href="#" class="egg">禽类蛋品</a></li>
-                    <li><a href="#" class="vegetables">新鲜蔬菜</a></li>
-                    <li><a href="#" class="ice">速冻食品</a></li>
-                </ul>
-            </div>
-            <ul class="navlist fl">
-                <li><a href="">首页</a></li>
-                <li class="interval">|</li>
-                <li><a href="">手机生鲜</a></li>
-                <li class="interval">|</li>
-                <li><a href="">抽奖</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="breadcrumb">
-        <a href="#">全部分类</a>
-        <span>></span>
-        <a href="#">新鲜水果</a>
-        <span>></span>
-        <a href="#">商品详情</a>
-    </div>
-
-    <div class="goods_detail_con clearfix">
-        <div class="goods_detail_pic fl"><img src="images/goods_detail.jpg"></div>
-
-        <div class="goods_detail_list fr">
-            <h3>{{ goods.title }}</h3>
-            <p>{{ goods.gjianjie }}</p>
-            <div class="prize_bar">
-                <span class="show_pirze">¥<em id="price">{{ goods.gprice }}</em></span>
-                <span class="show_unit">单  位：{{ goods.gunit }}</span>
-            </div>
-            <div class="goods_num clearfix">
-                <div class="num_name fl">数 量：</div>
-                <div class="num_add fl">
-                    <input type="text" class="num_show fl" value="1" id="anum">
-                    <a href="javascript:add()" class="add fr" >+</a>
-                    <a href="javascript:minus()" class="minus fr">-</a>
-                </div>
-            </div>
-            <div class="total">总价：<em id="total">16.80元</em></div>
-            <div class="operate_btn">
-                <a href="" onclick="getnum(this)" class="buy_btn">立即购买</a>
-                <a href="{% url 'add_cart' goods.id %}" class="add_cart" id="add_cart">加入购物车</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="main_wrap clearfix">
-        <div class="l_wrap fl clearfix">
-            <div class="new_goods">
-                <h3>新品推荐</h3>
-                <ul>
-                    <li>
-                        <a href="#"><img src="images/goods/goods001.jpg"></a>
-                        <h4><a href="#">进口柠檬</a></h4>
-                        <div class="prize">￥3.90</div>
-                    </li>
-                    <li>
-                        <a href="#"><img src="images/goods/goods002.jpg"></a>
-                        <h4><a href="#">玫瑰香葡萄</a></h4>
-                        <div class="prize">￥16.80</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="r_wrap fr clearfix">
-            <ul class="detail_tab clearfix">
-                <li class="active">商品介绍</li>
-                <li>评论</li>
-            </ul>
-
-            <div class="tab_content">
-                <dl>
-                    <dt>商品详情：</dt>
-                    <dd>{{ goods.gcontext }}</dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block foot %}
-    <div class="add_jump"></div>
+{% block head %}
     <script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+    <script type="text/javascript">
+        function add() {
+            num = parseFloat($('#num').val());
+            $('#num').val(num + 1);
+            $('#num').blur();
+        }
+
+        function minus() {
+            num = parseFloat($('#num').val());
+            $('#num').val(num - 1);
+            $('#num').blur();
+        }
+
+        $(function () {
+            $('#num').blur(function () {
+                num = parseFloat($('#num').val());
+                price = parseFloat($('#gprice').text());
+                total = num * price;
+                $('#gtotal').text(total.toFixed(2));
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        function gethref(a) {
+            var num = document.getElementById("num").value;
+            a.href = '/immedi_buy' + "{{ goods.id }}_" + num;
+        }
+    </script>
+    <script type="text/javascript">
+        function add_cart(a) {
+            var num = document.getElementById("num").value;
+            a.href = '/add_cart' + "{{ goods.id }}_" + num;
+        }
+    </script>
     <script type="text/javascript">
         var $add_x = $('#add_cart').offset().top;
         var $add_y = $('#add_cart').offset().left;
@@ -118,32 +57,99 @@
                 });
         })
     </script>
-    <script type="text/javascript">
-                    function getnum(a) {
-                        var num = $('.anum').val()
-                        a.href = '/immedi_buy2_' + num;
-                    }
-                </script>
 {% endblock %}
 
+{% block content %}
+    <div class="navbar_con">
+        <div class="navbar clearfix">
+            <div class="subnav_con fl">
+                <h1>全部商品分类</h1>
+                <span></span>
+                <ul class="subnav">
+                    <li><a href="/list1_1_1" class="fruit">新鲜水果</a></li>
+                    <li><a href="/list2_1_1" class="seafood">海鲜水产</a></li>
+                    <li><a href="/list3_1_1" class="meet">猪牛羊肉</a></li>
+                    <li><a href="/list4_1_1" class="egg">禽类蛋品</a></li>
+                    <li><a href="/list5_1_1" class="vegetables">新鲜蔬菜</a></li>
+                    <li><a href="/list6_1_1" class="ice">速冻食品</a></li>
+                </ul>
+            </div>
+            <ul class="navlist fl">
+                <li><a href="/">首页</a></li>
+                {#                <li class="interval">|</li>#}
+                {#                <li><a href="">手机生鲜</a></li>#}
+                <li class="interval">|</li>
+                <li><a href="">抽奖</a></li>
+            </ul>
+        </div>
+    </div>
 
-<script type="text/javascript">
-    function add() {
-        num = parseFloat($('.num_show').val());
-        $('.num_show').val(num+1);
-        $('.num_show').blur();
-    }
-    function minus() {
-        num = parseFloat($('.num_show').val());
-        $('.num_show').val(num-1);
-        $('.num_show').blur();
-    }
-    $(function () {
-            $('.num_show').blur(function () {
-                num = parseFloat($('.num_show').val());
-                price = parseFloat($('#gprice').text());
-                total = num*price;
-                $('#gtotal').text(total.toFixed(2));
-            });
-        })
-</script>
+    <div class="breadcrumb">
+        <a href="/">全部分类</a>
+        <span>></span>
+        <a href="/list{{ typeinfo.id }}_1_1">{{ typeinfo.title }}</a>
+        <span>></span>
+        <a href="/{{ goods.id }}/">商品详情</a>
+    </div>
+
+    <div class="goods_detail_con clearfix">
+        <div class="goods_detail_pic fl"><img src="/static/{{ goods.gpic }}/"></div>
+
+        <div class="goods_detail_list fr">
+            <h3>{{ goods.gtitle }}</h3>
+            <p>{{ goods.gjianjie }}。</p>
+            <div class="prize_bar">
+                <span class="show_pirze">¥<em id="gprice">{{ goods.gprice }}</em></span>
+                <span class="show_unit">单  位：{{ goods.gunit }}</span>
+            </div>
+            <div class="goods_num clearfix">
+                <div class="num_name fl">数 量：</div>
+                <div class="num_add fl">
+                    <input type="text" class="num_show fl" id="num" value="1">
+                    <a href="javascript:add();" class="add fr">+</a>
+                    <a href="javascript:minus();" class="minus fr">-</a>
+                </div>
+            </div>
+            <div class="total">总价：<em id="gtotal">{{ goods.gprice }}元</em></div>
+            <div class="operate_btn">
+                <a href="" onclick="gethref(this)" class="buy_btn" id="immedi_buy">立即购买</a>
+                <a href="" onclick="add_cart(this)" class="add_cart" id="add_cart">加入购物车</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main_wrap clearfix">
+        <div class="l_wrap fl clearfix">
+            <div class="new_goods">
+                <h3>新品推荐</h3>
+                <ul>
+                    {% for goods in news %}
+                        <li>
+                            <a href="/{{ goods.id }}/"><img src="/static/{{ goods.gpic }}"></a>
+                            <h4><a href="/{{ goods.id }}/">{{ goods.gtitle }}</a></h4>
+                            <div class="prize">￥{{ goods.gprice }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="r_wrap fr clearfix">
+            <ul class="detail_tab clearfix">
+                <li class="active">商品介绍</li>
+                <li>评论</li>
+            </ul>
+
+            <div class="tab_content">
+                <dl>
+                    <dt>商品详情：</dt>
+                    <dd>{{ goods.gcontext }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{#{% block foot %}#}
+{#    <div class="add_jump"></div>#}
+{#{% endblock %}#}

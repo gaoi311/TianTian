@@ -21,6 +21,8 @@ urlpatterns = [
     path('', index),
     url(r'^list(\d+)_(\d+)_(\d+)/', list, name='list'),
     url(r'^immedi_buy(\d+)_(\d+)/', immedi_buy, name='immedi_buy'),
-    url(r'^add_cart/(\d+)/', add_cart, name='add_cart'),
-    path('show_cart/', show_cart, name='show_cart')
+    url(r'^add_cart(\d+)_(\d+)/', add_cart, name='add_cart'),
+    path('show_cart/', show_cart, name='show_cart'),
+    url(r'^(\d+)/', detail, name='detail'),
+    url(r'^delete_cart/(\d+)', delete_cart, name='delete_cart')
 ]

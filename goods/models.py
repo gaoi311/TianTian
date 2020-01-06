@@ -1,5 +1,7 @@
 from django.db import models
 
+from user.models import *
+
 
 # Create your models here.
 
@@ -37,8 +39,7 @@ class GoodsInfo(models.Model):
         verbose_name_plural = verbose_name
 
 
-class CartItem:
-    def __init__(self, cid, num):
-        self.cid = cid
-        self.goods = GoodsInfo.objects.get(pk=int(cid))
-        self.num = num
+class CartItem(models.Model):
+    user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name='所属用户')
+    goods = models.ForeignKey(GoodsInfo, on_delete=models.CASCADE, verbose_name='商品')
+    num = models.IntegerField(verbose_name='数量')
