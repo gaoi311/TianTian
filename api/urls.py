@@ -1,4 +1,4 @@
-"""TianTian URL Configuration
+"""tiantian URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from django.conf.urls import url
+from .views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('user/', include('user.urls')),
-    path('', include('goods.urls')),
-    path('shop/', include('shop.urls')),
-    path('api/', include('api.urls'))
+    url(r'^pay/', index_many),
+    url(r'^pay(\d+)_(\d+)_(\d+)', index_one),
+    url(r'^pay_result/', pay_result),
+    url(r'^update_order/', update_order),
 ]

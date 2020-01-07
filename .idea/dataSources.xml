@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="tiantian" uuid="0899f706-2b7f-4b22-b070-cb6a6e77f6ea">
+    <data-source source="LOCAL" name="tiantian" uuid="5834ffa9-0aa6-441c-aa31-3f34d916acf0">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/tiantian</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/tiantian1</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

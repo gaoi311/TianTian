@@ -2,7 +2,6 @@
 {% block head %}
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-
         <link rel="stylesheet" type="text/css" href="/static/css/verify.css">
 
 {% endblock %}
@@ -22,12 +21,12 @@
 				<a href="{% url 'login' %}">登录</a>
 			</div>
 			<div class="reg_form clearfix">
-				<form action="{% url 'forget_handler' %}" method="post">
+				<form action="{% url 'send_code' %}" method="post">
                     {% csrf_token %}
 				<ul>
                     <li>
 						<label>手机:</label>
-						<input type="text" name="mobile" id="mobile">
+						<input type="text" name="mobile" id="mobile" value="{{ phone }}">
 						<span class="error_tip">提示信息</span>
 					</li>
                     <li>
@@ -43,10 +42,10 @@
                         <label>验证码</label>
                         <input type="text" name="code" id="code">
                     </li>
-                    <li>
-                        <label>用户名:</label>
-                        <input type="text" name="name" id="name">
-                    </li>
+{#                    <li>#}
+{#                        <label>用户名:</label>#}
+{#                        <input type="text" name="name" id="name">#}
+{#                    </li>#}
 					<li>
 						<label>密码:</label>
 						<input type="password" name="pwd" id="pwd">

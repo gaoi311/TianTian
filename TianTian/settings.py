@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'goods',
-    'shop'
+    'shop',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'TianTian.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tiantian',
+        'NAME': 'tiantian1',
         'USER': 'gy',
         'PASSWORD': 'gy',
         'HOST': 'localhost',
@@ -122,3 +123,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (BASE_DIR, 'static')
+
+
+# 支付相关配置
+APPID = "2016102100731645"
+NOTIFY_URL = "http://127.0.0.1:8000/api/update_order/"
+RETURN_URL = "http://127.0.0.1:8000/api/pay_result/"
+PRI_KEY_PATH = '/home/gaoi/PycharmProjects/TianTian/keys/app_private_2048.txt'
+PUB_KEY_PATH = '/home/gaoi/PycharmProjects/TianTian/keys/alipay_public_2048.txt'

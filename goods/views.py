@@ -103,15 +103,24 @@ def list(request, tid, pindex, sort):
 
 
 def immedi_buy(request, gid, num):
+    user = UserInfo.objects.get(id=request.session['user_id'])
     goods = GoodsInfo.objects.get(pk=int(gid))
     count = 1
     context = {
         'title': '提交订单',
         'count': count,
         'goods': goods,
+        'user': user,
         'num': num,
         'total': goods.gprice * int(num)
     }
+
+    uid = request.session['user_id']
+    cartitem = CartItem(user_id=uid, goods_id=gid, num=num)
+    cart = CartItem.objects.filter(pk=cartitem.id)
+    total = 0
+    for cartitem in cart:
+        total += cartitem.num * cartitem.goods.gprice
     return render(request, 'shop/place_order.html', context=context)
 
 
@@ -122,10 +131,9 @@ def show_cart(request):
         request.session['count'] = cart.count()
         total = 0
         for cartitem in cart:
-            total += cartitem.num * cartitem.goods.gprice
+            total += cartitem.subtotal
         context = {
             'title': '购物车',
-            'count': cart.count(),
             'cart': cart,
             'total': total
         }
@@ -145,9 +153,13 @@ def add_cart(request, gid, num):
     if len(cart) >= 1:
         cartitem = cart[0]
         cartitem.num += num
+        cartitem.subtotal += (num * cartitem.goods.gprice)
+        cartitem.save()
     else:
         cartitem = CartItem(user_id=uid, goods_id=gid, num=num)
-    cartitem.save()
+        cartitem.subtotal = cartitem.goods.gprice * num
+        cartitem.save()
+
     # 判断请求方式 是否是ajax，若是则返回json格式的 商品数量即可
     if request.is_ajax():
         num = CartItem.objects.filter(user_id=uid).count()
@@ -160,3 +172,48 @@ def delete_cart(request, id):
     id = int(id)
     CartItem.objects.get(pk=id).delete()
     return redirect(show_cart)
+
+
+def edit_cart(request, method, cid):
+    method = int(method)
+    cid = int(cid)
+    cartitem = CartItem.objects.get(id=cid)
+    if method == 1:
+        cartitem.num += 1
+    else:
+        cartitem.num -= 1
+    cartitem.save()
+    return redirect(show_cart)
+
+
+def search(request, key_word, pindex, sort):
+    if sort == '1':
+        search_list = GoodsInfo.objects.filter(gtitle__contains=key_word).order_by('-id')
+    elif sort == '2':
+        search_list = GoodsInfo.objects.filter(gtitle__contains=key_word).order_by('-gprice')
+    elif sort == '3':
+        search_list = GoodsInfo.objects.filter(gtitle__contains=key_word).order_by('-gclick')
+
+    paginator = Paginator(search_list, 10)
+
+    page = paginator.page(int(pindex))
+    return render(request, 'goods/search_result_show.html', {
+        'title': '查询结果-' + key_word,
+        'keyword': key_word,
+        'page': page,
+        'paginator': paginator,
+        'sort': sort
+    })
+
+
+def settle(request):
+    cart = request.GET['cart']
+    total = request.GET['total']
+    count = request.GET['count']
+    context = {
+        'title': '提交订单',
+        'cart': cart,
+        'count': count,
+        'total': total
+    }
+    return render(request, 'shop/place_order.html', context=context)

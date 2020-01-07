@@ -43,3 +43,4 @@ class CartItem(models.Model):
     user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, verbose_name='所属用户')
     goods = models.ForeignKey(GoodsInfo, on_delete=models.CASCADE, verbose_name='商品')
     num = models.IntegerField(verbose_name='数量')
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="商品小计", default=0)

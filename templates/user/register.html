@@ -1,55 +1,100 @@
 {% extends 'basic01.html' %}
+
 {% block head %}
-    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="/static/js/register.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+        <link rel="stylesheet" type="text/css" href="/static/css/verify.css">
 {% endblock %}
+
 {% block body %}
-    <div class="register_con">
-        <div class="l_con fl">
-            <a class="reg_logo"><img src="/static/images/logo02.png"></a>
-            <div class="reg_slogan">足不出户 · 新鲜每一天</div>
-            <div class="reg_banner"></div>
-        </div>
-        <div class="r_con fr">
-            <div class="reg_title clearfix">
-                <h1>用户注册</h1>
-                <a href="{% url 'login' %}">登录</a>
-            </div>
-            <div class="reg_form clearfix">
-                <form action="{% url 'register_handler' %}" method="post">
+	<div class="register_con">
+		<div class="l_con fl">
+			<a class="reg_logo"><img src="/static/images/logo02.png"></a>
+			<div class="reg_slogan">足不出户  ·  新鲜每一天</div>
+			<div class="reg_banner"></div>
+		</div>
+
+		<div class="r_con fr">
+			<div class="reg_title clearfix">
+				<h1>用户注册</h1>
+				<a href="{% url 'login' %}">登录</a>
+			</div>
+			<div class="reg_form clearfix">
+				<form action="{% url 'register_handler' %}" method="post">
                     {% csrf_token %}
-                    <ul>
-                        <li>
-                            <label>用户名:</label>
-                            <input type="text" name="user_name" id="user_name">
-                            <span class="error_tip">提示信息</span>
-                        </li>
-                        <li>
-                            <label>密码:</label>
-                            <input type="password" name="pwd" id="pwd">
-                            <span class="error_tip">提示信息</span>
-                        </li>
-                        <li>
-                            <label>确认密码:</label>
-                            <input type="password" name="cpwd" id="cpwd">
-                            <span class="error_tip">提示信息</span>
-                        </li>
-                        <li>
-                            <label>邮箱:</label>
-                            <input type="text" name="email" id="email">
-                            <span class="error_tip">提示信息</span>
-                        </li>
-                        <li class="agreement">
-                            <input type="checkbox" name="allow" id="allow" checked="checked">
-                            <label>同意”天天生鲜用户使用协议“</label>
-                            <span class="error_tip2">提示信息</span>
-                        </li>
-                        <li class="reg_sub">
-                            <input type="submit" value="注 册" name="">
-                        </li>
-                    </ul>
-                </form>
-            </div>
-        </div>
-    </div>
+				<ul>
+					<li>
+						<label>用户名:</label>
+						<input type="text" name="user_name" id="user_name">
+						<span class="error_tip">提示信息</span>
+					</li>					
+					<li>
+						<label>密码:</label>
+						<input type="password" name="pwd" id="pwd">
+						<span class="error_tip">提示信息</span>
+					</li>
+					<li>
+						<label>确认密码:</label>
+						<input type="password" name="cpwd" id="cpwd">
+						<span class="error_tip">提示信息</span>
+					</li>
+                    <li>
+						<label>手机:</label>
+						<input type="text" name="mobile" id="mobile">
+						<span class="error_tip">提示信息</span>
+					</li>
+					<li>
+						<label>邮箱:</label>
+						<input type="text" name="email" id="email">
+						<span class="error_tip">提示信息</span>
+					</li>
+                    <div id="mpanel2" >
+                    </div>
+                    <button type="button" id="check-btn" class="verify-btn" onclick="btn1()">确定</button>
+					<li class="agreement">
+						<input type="checkbox" name="allow" id="allow" checked="checked">
+						<label>同意”天天生鲜用户使用协议“</label>
+						<span class="error_tip2">提示信息</span>
+					</li>
+
+					<li class="reg_sub">
+                        <input type="submit"  id="btn1" name=""  disabled="disabled" value="请先输入验证码">
+					</li>
+				</ul>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+    <script type="text/javascript" src="/static/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="/static/js/verify.js" ></script>
+
+    <script>
+    $('#mpanel2').codeVerify({
+        		type : 1,
+		    	width : '400px',
+		    	height : '50px',
+		    	fontSize : '30px',
+		    	codeLength : 6,
+		    	btnId : 'check-btn',
+		    	ready : function() {
+		    	},
+		    	success : function() {
+        		    btn1();
+		    		alert('验证匹配！');
+		    	},
+		    	error : function() {
+		    		alert('验证码不匹配！');
+		    	}
+		    })
+
+    function btn1() {
+        var obj = document.getElementById("btn1");
+        obj.disabled = false;
+        obj.value = "注册";
+    }
+    </script>
+
 {% endblock %}

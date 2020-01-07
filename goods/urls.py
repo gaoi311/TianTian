@@ -19,10 +19,13 @@ from .views import *
 
 urlpatterns = [
     path('', index),
+    path('show_cart/', show_cart, name='show_cart'),
     url(r'^list(\d+)_(\d+)_(\d+)/', list, name='list'),
     url(r'^immedi_buy(\d+)_(\d+)/', immedi_buy, name='immedi_buy'),
     url(r'^add_cart(\d+)_(\d+)/', add_cart, name='add_cart'),
-    path('show_cart/', show_cart, name='show_cart'),
     url(r'^(\d+)/', detail, name='detail'),
-    url(r'^delete_cart/(\d+)', delete_cart, name='delete_cart')
+    url(r'^delete_cart/(\d+)', delete_cart, name='delete_cart'),
+    url(r'^search/(.*)/(\d+)/(\d+)', search, name='search'),
+    url(r'^edit_cart(\d+)_(\d+)/', edit_cart, name='edit_cart'),
+    url(r'^settle/', settle, name='settle')
 ]
